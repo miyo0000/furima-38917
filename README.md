@@ -41,7 +41,7 @@ Things you may want to cover:
 
 Association
 ・has_many:items
-・has_many:history
+・has_many:histories
 
 
 ## items テーブル
@@ -59,7 +59,7 @@ Association
 | price             | integer| null: false                   |
 
 ・belongs_to :user
-・has_one :histories
+・has_one :history
 
 
 ## histories テーブル
