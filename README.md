@@ -50,14 +50,14 @@ Association
 | ------------------| ------ | ------------------------------|
 | name              | string | null: false                   |
 | detail            | text   | null: false                   |
-| category_id       | integer| null: false,foreign_key: true |
+| category_id       | integer| null: false                   |
 | condition_id      | integer| null: false                   |
 | delivery_charge_id| integer| null: false                   |
 | prefecture_id     | integer| null: false                   |
 | handling_time_id  | integer| null: false                   |
 | user              |references| null: false,foreign_key: true |
 | price             | integer| null: false                   |
-| brand_id          | integer| null: false,foreign_key: true |
+| brand_id          | integer| null: false,                  |
 
 ・belongs_to :user
 ・has_one :history
@@ -72,6 +72,8 @@ Association
 
 ・belongs_to :user
 ・belongs_to :item
+・has_one :address
+
 
 ## addresses テーブル
 
@@ -83,7 +85,7 @@ Association
 | adress             | string    | null: false |
 | building           | string    |             |
 | phone_number       | string    | null: false |
-| history_id         | references| null: false,foreign_key: true|
+| history            | references| null: false,foreign_key: true|
 
 ・belongs_to :history
 
