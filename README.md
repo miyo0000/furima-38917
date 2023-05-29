@@ -59,14 +59,11 @@ Association
 | price             | integer| null: false                   |
 | brand_id          | integer| null: false,foreign_key: true |
 
-・belongs_to :images
-・belongs_to :category
-・belongs_to :brands
 ・belongs_to :user
-・belongs_to :history
+・has_one :history
 
 
-## history テーブル
+## histories テーブル
 
 | Column             | Type      | Options                        |
 | ------------------ | ----------| ------------------------------ |
@@ -74,7 +71,7 @@ Association
 | item               |references | null: false,foreign_key: true |
 
 ・belongs_to :user
-
+・belongs_to :item
 
 ## addresses テーブル
 
@@ -86,46 +83,7 @@ Association
 | adress             | string    | null: false |
 | building           | string    |             |
 | phone_number       | string    | null: false |
-| history_id         | integer   | null: false,foreign_key: true|
+| history_id         | references| null: false,foreign_key: true|
 
 ・belongs_to :history
 
-## images テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| image   | references | null: false,                   |
-| item_id | references | null: false, foreign_key: true |
-
-・belongs_to :usere
-・belongs_to :items
-
-
-## categories テーブル
-
-| Column  | Type       | Options     |
-| ------- | ---------- | ----------- |
-| category| string     | null: false |
-| ancestry| references | null: false |
-
-・has_many :items
-
-
-## brands テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| brands  | string     | index: true                    |
-
-・has_many :items
-
-
-## card テーブル
-
-| Column     | Type       | Options                        |
-| -----------| ---------- | ------------------------------ |
-| user_id    | integer    | null: false, foreign_key: true |
-| customer_id| string     | null: false,                   |
-| card_id    | string     | null: false,                   |
-
-・belongs_to :user
