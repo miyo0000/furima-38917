@@ -57,10 +57,9 @@ Association
 | handling_time_id  | integer| null: false                   |
 | user              |references| null: false,foreign_key: true |
 | price             | integer| null: false                   |
-| brand_id          | integer| null: false,                  |
 
 ・belongs_to :user
-・has_one :history
+・has_one :histories
 
 
 ## histories テーブル
