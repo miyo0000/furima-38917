@@ -79,9 +79,9 @@ RSpec.describe Item, type: :model do
       end
 
       it 'ユーザー情報がない場合は登録できない' do
-        item = Item.new
-        expect(item).not_to be_valid
-        expect(item.errors[:user]).to include('must exist')
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
