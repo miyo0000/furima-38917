@@ -42,10 +42,15 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
-      it ':priceが300~9999999の範囲外だと登録できない' do
+      it ':priceが299以下の場合は登録できない' do
         @item.price = '100'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
+      end
+      it ':priceが10,000,000以上の場合は登録できない' do
+        @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it ':category_idが「---」だと登録できない' do
         @item.category_id = 0
@@ -71,6 +76,12 @@ RSpec.describe Item, type: :model do
         @item.handling_time_id = '0'
         @item.valid?
         expect(@item.errors.full_messages).to include('Handling time Select')
+      end
+
+      it 'ユーザー情報がない場合は登録できない' do
+        item = Item.new
+        expect(item).not_to be_valid
+        expect(item.errors[:user]).to include('must exist')
       end
     end
   end
