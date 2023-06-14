@@ -150,10 +150,8 @@
                 </h3>
                 <div class='item-price'>
                   <span><%= item.price %>円<br>
-                  <% if item.delivery_charge_id == 1 %>
-                   <%= "着払い（購入者負担）" %>
-                  <% else %> 
-                   <%= "送料込み（出品者負担）" %>
+                  <% if item.delivery_charge_id.present? %>
+                   <%= DeliveryCharge.find(item.delivery_charge_id).name %>
                   <% end %>
                   </span>
                   <div class='star-btn'>
