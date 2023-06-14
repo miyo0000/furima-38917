@@ -150,9 +150,7 @@
                 </h3>
                 <div class='item-price'>
                   <span><%= item.price %>円<br>
-                  <% if item.delivery_charge_id.present? %>
-                   <%= DeliveryCharge.find(item.delivery_charge_id).name %>
-                  <% end %>
+                  <%= item.delivery_charge.name %>
                   </span>
                   <div class='star-btn'>
                     <%= image_tag "star.png", class:"star-icon" %>
