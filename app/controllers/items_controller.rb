@@ -58,9 +58,8 @@ class ItemsController < ApplicationController
 
   def move_to_index
     set_item
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    redirect_to root_path unless @item && current_user && current_user.id == @item.user_id
+    
   end
   
 end
