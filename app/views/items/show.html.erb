@@ -21,6 +21,9 @@
       <span class="item-postage">
         <%= @item.delivery_charge.name %>
       </span>
+      <span class="item-explain-box">
+        <%= @item.detail %>
+      </span>
     </div>
 
     <% if user_signed_in? && current_user.id == @item.user_id %>
