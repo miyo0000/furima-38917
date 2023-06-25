@@ -6,4 +6,8 @@ Rails.application.routes.draw do
 
   resources :items, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
+  resources :items do
+    resources :orders, only: [:index, :create]
+  end
+
 end
