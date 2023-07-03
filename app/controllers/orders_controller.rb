@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   require 'payjp'
   before_action :set_item, only: [:index, :create]
-
+  before_action :move_to_index, only: [:index]
 
 
   def index
@@ -42,15 +42,23 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    #params.permit(:token).merge(item_price: @item_price, token: params[:token])
     params.require(:donation_address).permit(:@item_price).merge(token: params[:token], user_id: current_user.id)
-    #params.permit(:post_code, :prefecture, :city, :address, :building, :phone_number).merge(item_id: params[:item_id], token: params[:token])
   end
 
   def adress_params
-    #params.permit(:token).merge(item_price: @item_price, token: params[:token])
-    #arams.require(:donation_address).permit(:@item_price).merge(token: params[:token], oreder_id: @order.id)
     params.permit(:post_code, :prefecture, :city, :address, :building, :phone_number).merge(item_id: params[:item_id], oreder_id: @order.id)
   end
 
+
+  def move_to_index
+    # sign_inしていないと購入ページに遷移できない
+    redirect_to new_user_session_path unless user_signed_in?
+    # 出品者が購入ページに遷移できない
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    # 購入済みの商品の購入ページに遷移できない
+    elsif Order.exists?(item_id: @item.id)
+      redirect_to root_path
+    end
+  end
 end
