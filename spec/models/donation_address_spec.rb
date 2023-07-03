@@ -7,6 +7,7 @@ RSpec.describe DonationAddress, type: :model do
 
   describe 'OrderAddress登録' do
     context '登録がうまくいくとき' do
+      
       it 'post_code, prefecture_id, city, address, phone_number,が存在すれば登録できる' do
         expect(@donation_address).to be_valid
       end
@@ -17,6 +18,13 @@ RSpec.describe DonationAddress, type: :model do
     end
 
     context '登録がうまくいかないとき' do
+
+      it 'tokenが空だと登録できない' do
+        @donation_address.token = nil
+        @donation_address.valid?
+        expect(@donation_address.errors.full_messages).to include("Token can't be blank")
+      end
+
       it 'post_codeが空だと登録できない' do
         @donation_address.post_code = nil
         @donation_address.valid?

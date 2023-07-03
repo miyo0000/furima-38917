@@ -6,6 +6,9 @@ FactoryBot.define do
     address       { '青山1-1' }
     phone_number  { '09011112222' }
     user_id { 1 }
+
+    token { "abcd1234" }
+    
     association :user
   end
 end
