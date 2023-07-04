@@ -7,15 +7,12 @@ class DonationAddress
   validates :prefecture_id, numericality: { other_than: 0 }
   validates :post_code, format: { with: /\A\d{3}-\d{4}\z/ }
   validates :token, presence: true
-  
-
-
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
-    Address.create(post_code: post_code, prefecture: prefecture_id, city: city, address: address, building: building, phone_number: phone_number, order_id: order.id)
+    Address.create(post_code: post_code, prefecture: prefecture_id, city: city, address: address, building: building,
+                   phone_number: phone_number, order_id: order.id)
   end
-  
 
   def user=(user)
     self.user_id = user.id

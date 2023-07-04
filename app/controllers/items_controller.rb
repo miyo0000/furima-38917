@@ -3,8 +3,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :show, :update, :edit, :destroy]
   before_action :move_to_index, only: [:edit, :destroy]
 
-
-
   def new
     @item = Item.new
   end
@@ -29,7 +27,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
@@ -41,7 +38,6 @@ class ItemsController < ApplicationController
     @item.destroy
     redirect_to root_path
   end
-
 
   private
 
