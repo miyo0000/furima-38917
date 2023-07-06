@@ -1,4 +1,5 @@
 FactoryBot.define do
-  factory :history do
+  factory :address do
+
   end
 end

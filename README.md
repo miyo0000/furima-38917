@@ -62,7 +62,7 @@ Association
 ・has_one :history
 
 
-## histories テーブル
+## orderers テーブル
 
 | Column             | Type      | Options                        |
 | ------------------ | ----------| ------------------------------ |

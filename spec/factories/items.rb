@@ -9,6 +9,12 @@ FactoryBot.define do
     handling_time_id { 1 }
     price { 1000 }
 
-    association :user
+    user { FactoryBot.create(:user) }
+
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+
+    end
+
   end
 end
