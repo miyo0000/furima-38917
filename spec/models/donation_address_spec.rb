@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe DonationAddress, type: :model do
   before do
-    @donation_address = FactoryBot.build(:donation_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item) 
+    @donation_address = FactoryBot.build(:donation_address, user_id: user.id, item_id: item.id)
   end
 
   describe 'OrderAddress登録' do
@@ -53,11 +55,43 @@ RSpec.describe DonationAddress, type: :model do
         @donation_address.valid?
         expect(@donation_address.errors.full_messages).to include("Phone number can't be blank")
       end
+      it 'phone_namberが9桁以下では登録できない' do
+        @donation_address.phone_number = 0000
+        @donation_address.valid?
+        expect(@donation_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
+      end
+
+      it 'phone_namberが12桁以上では登録できない' do
+        @donation_address.phone_number = 000000000000000
+        @donation_address.valid?
+        expect(@donation_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
+      end
+
+      it 'phone_namberが半角数字以外が含まれている場合は登録できない' do
+        @donation_address.phone_number = "0あああ"
+        @donation_address.valid?
+        expect(@donation_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
+      end
+
       it 'phone_namberが10桁か11桁でないと登録できない' do
         @donation_address.phone_number = 0o000
         @donation_address.valid?
         expect(@donation_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
+
+      it 'userが紐付いていなければ登録できない' do
+        @donation_address.user_id = nil
+        @donation_address.valid?
+        expect(@donation_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐付いていなければ登録できない' do
+        @donation_address.item_id = nil
+        @donation_address.valid?
+        expect(@donation_address.errors.full_messages).to include("Item can't be blank")
+      end
+
+
     end
   end
 end

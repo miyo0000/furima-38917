@@ -1,12 +1,15 @@
-class DonationAddress
+class DonationAddress 
   include ActiveModel::Model
+
+  
   attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :city, :address, :building, :phone_number, :history, :token
 
-  validates :post_code, :prefecture_id, :city, :address, :phone_number, presence: true
+  validates :post_code, :prefecture_id, :city, :address, :phone_number, :token, presence: true 
   validates :phone_number, length: { in: 10..11 }, format: { with: /\A\d+\z/ }
   validates :prefecture_id, numericality: { other_than: 0 }
   validates :post_code, format: { with: /\A\d{3}-\d{4}\z/ }
-  validates :token, presence: true
+  validates :user_id, :item_id, presence: true
+
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)

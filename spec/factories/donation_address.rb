@@ -5,10 +5,11 @@ FactoryBot.define do
     city          { '横浜市緑区' }
     address       { '青山1-1' }
     phone_number  { '09011112222' }
-    user_id { 1 }
+    building      { 'マンション' }
 
     token { 'abcd1234' }
 
-    association :user
+    
+
   end
 end
