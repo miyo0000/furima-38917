@@ -91,7 +91,6 @@ RSpec.describe DonationAddress, type: :model do
         expect(@donation_address.errors.full_messages).to include("Item can't be blank")
       end
 
-
     end
   end
 end
