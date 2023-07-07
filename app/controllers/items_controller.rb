@@ -38,6 +38,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    puts "ID: #{params[:id]}"
     @item.destroy
     redirect_to root_path
   end
